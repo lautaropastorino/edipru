@@ -1,2 +1,2 @@
 # edipru
-Ambiente de pruebas automatizado para JADE sobre máquinas virtuales completas utilizando Vagrant
+Entorno DIstribuido de PRUebas automatizado para JADE sobre máquinas virtuales completas utilizando Vagrant
