@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
   begin
     cant_vm = Integer(ENV['VMS'])
     gui = Integer(ENV['GUI'])
-    if gui < 0 and gui > 1
+    if gui < 0 or gui > 1
       raise TypeError
     end
   rescue TypeError, ArgumentError 
