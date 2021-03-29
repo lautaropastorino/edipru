@@ -7,7 +7,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="Utilidad de línea de comandos para construir un entorno de desarrollo distribuido utilizando JADE")
     parser.add_argument("-s", "--start", action="store_true", help="Iniciar el entorno una vez construido el Vagrantfile")
-    parser.add_argument("-v", "--vms", type=int, nargs=1, action="store", help="Indicar la cantidad de máquinas virtuales a generar")
+    parser.add_argument("-v", "--vms", required=True, type=int, nargs=1, action="store", help="Indicar la cantidad de máquinas virtuales a generar")
     parser.add_argument("-g", "--gui", action="store_true", help="Utilizar interfaz gráfica en la máquina virtual principal")
 
     args = parser.parse_args()
