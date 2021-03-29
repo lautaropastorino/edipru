@@ -1,8 +1,5 @@
 import sys, subprocess, os, argparse
 
-def usage():
-    return "Uso:\npython generator.py [1=true o 0=false iniciar entorno] [int num_vms] [1=true o 0=false GUI] [list archivos.java (opcional)]"
-
 def main():
 
     parser = argparse.ArgumentParser(description="Utilidad de línea de comandos para construir un entorno de desarrollo distribuido utilizando JADE")
