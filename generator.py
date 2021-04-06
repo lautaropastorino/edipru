@@ -1,4 +1,4 @@
-import sys, subprocess, os, argparse
+import sys, subprocess, os, argparse, platform, pathlib
 
 def read_files(args):
     """ Lee un path y verifica que exista. Luego lo asocia a una vm.
@@ -15,7 +15,8 @@ def read_files(args):
             print(f"Agentes a compilar y ejecutar en vm{i}")
         f = input("Nombre del archivo (0 para siguiente vm): ")
         while (f != "0"):
-            if os.path.exists(f):
+            if os.path.isfile(f):
+                f = pathlib.Path(f)
                 a = input("Nombre que tomará el agente: ")
                 if a == "" or a[0].isnumeric():
                     n = len(files[f"vm{i}"])
@@ -59,6 +60,8 @@ def main():
     except FileExistsError:
         pass
 
+    sistema_operativo = "ps1" if platform.system() == 'Windows' else 'sh' # Cambio la extension según el SO 
+
     with open("Vagrantfile", "a") as vagrant_file:
         vagrant_file.write("""Vagrant.require_version ">= 1.8"\nVagrant.configure("2") do |config|""")
 
@@ -89,13 +92,9 @@ def main():
             vb.memory = 512
         end
         main.trigger.after :up do |trigger|
-            trigger.info = "Iniciando Jade..."
+            trigger.info = "Iniciando Jade en la main vm..."
             trigger.run = {path: """)
-            import platform
-            sistema_operativo = "ps1" if platform.system() == 'Windows' else 'sh' # Cambio la extension según el SO 
-            vagrant_file.write(f"""
-            "start_main.{sistema_operativo}"
-            """)
+            vagrant_file.write(f""""start_main.{sistema_operativo}" """)
             vagrant_file.write("""}
         end
             """)
@@ -107,8 +106,9 @@ def main():
             trigger.info = "Compilando y ejecutando agente {f[1]}"
         """)
                 vagrant_file.write("""
-            trigger.run = {:path => 'compile_and_run.sh', :args => '""")
-                vagrant_file.write(f"""main {f[0]} {f[1]} "{f[2]}" {f[3]}'""")
+            trigger.run = {:path => '""")
+                vagrant_file.write(f"""compile_and_run.{sistema_operativo}', :args => '""")
+                vagrant_file.write(f"""main {str(f[0])} {f[1]} "{f[2]}" {f[3]}'""")
                 vagrant_file.write("""}
         end
         """)
@@ -140,8 +140,13 @@ def main():
             trigger.info = "Compilando y ejecutando agente {f[1]}"
         """)
                     vagrant_file.write("""
-            trigger.run = {:path => 'compile_and_run.sh', :args => '""")
-                    vagrant_file.write(f"""vm{i} {f[0]} {f[1]} "{f[2]}" {f[3]}'""")
+            trigger.run = {:path => '""")
+                    vagrant_file.write(f"""compile_and_run.{sistema_operativo}', :args => '""")
+                    s = f[0]
+                    if sistema_operativo == "ps1": #En windows tengo que poner /// entre cada carpeta
+                        s = str(f[0]).split("\\")
+                        s = r"///".join(s)
+                    vagrant_file.write(f"""vm{i} {s} {f[1]} "{f[2]}" {f[3]}'""")
                     vagrant_file.write("""}
         end
             """)
