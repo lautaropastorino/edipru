@@ -90,11 +90,17 @@ def main():
         end
         main.trigger.after :up do |trigger|
             trigger.info = "Iniciando Jade..."
-            trigger.run = {path: "start_main.sh"}
+            trigger.run = {path: """)
+            import platform
+            sistema_operativo = "ps1" if platform.system() == 'Windows' else 'sh' # Cambio la extension según el SO 
+            vagrant_file.write(f"""
+            "start_main.{sistema_operativo}"
+            """)
+            vagrant_file.write("""}
         end
             """)
 
-        if files["vm0"]:
+        if files:
             for f in files["vm0"]:
                 vagrant_file.write(f""" 
         main.trigger.after :up do |trigger|
@@ -127,7 +133,7 @@ def main():
         vm.vm.network "private_network", type: "dhcp"
             """)
 
-            if files[f"vm{i}"]:
+            if files:
                 for f in files[f"vm{i}"]:
                     vagrant_file.write(f""" 
         vm.trigger.after :up do |trigger|
