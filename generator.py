@@ -151,8 +151,9 @@ def main():
         end
             """)
         
+            vagrant_file.write("""
+    end""")
         vagrant_file.write("""
-    end
 end""")
 
     if args.start: #Levantar el entorno

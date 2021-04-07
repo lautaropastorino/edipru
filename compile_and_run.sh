@@ -35,4 +35,4 @@ run="$run)'" # cierro parentesis
 
 echo $compile
 echo $run
-vagrant ssh $1 -- "$compile && $run" 
+vagrant ssh $1 -- "$compile && $run" & 
