@@ -28,7 +28,7 @@ def read_files(args):
                 args = input("Argumentos separados por espacios (puede ser vacío): ")
                 if args == "": # Lo mismo que con p
                     args = "0"
-                files[f"vm{i}"].append((f, a, args, p))
+                files[f"vm{i}"].append((f, a, p, args))
             else:
                 print("El archivo no existe, verifique el path")
             f = input("Nombre del archivo (0 para siguiente vm): ")
@@ -108,7 +108,7 @@ def main():
                 vagrant_file.write("""
             trigger.run = {:path => '""")
                 vagrant_file.write(f"""compile_and_run.{sistema_operativo}', :args => '""")
-                vagrant_file.write(f"""main {str(f[0])} {f[1]} "{f[2]}" {f[3]}'""")
+                vagrant_file.write(f"""main {str(f[0])} {f[1]} {f[2]} "{f[3]}"'""")
                 vagrant_file.write("""}
         end
         """)
