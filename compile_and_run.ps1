@@ -3,6 +3,10 @@
 # $args[2] = nombre que debe tomar el agente en el entorno
 # $args[3] = nombre del package java (puede ser vacio)
 # $args[4:] = args
+function start-jobhere([scriptblock]$block) {
+    # Esta funcion inicia un job en background pero primero setea la location al current working directory
+    Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -Script $block
+}
 
 $vm = $args[0]
 $path = $args[1]
@@ -44,6 +48,5 @@ Write-Host $run
 $cmd = 'vagrant ssh ' + $vm  + ' -- "' + $compile + ' && ' + $run + '"'
 Write-Host $cmd
 
-$sb = [scriptblock]::Create($cmd)
-Start-Job -ScriptBlock $sb 
-Wait-Job -ID 1 -Timeout 120
+$sb = [scriptblock]::Create($cmd) 
+start-jobhere($sb)

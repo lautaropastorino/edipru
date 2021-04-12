@@ -146,7 +146,7 @@ def main():
                     if sistema_operativo == "ps1": #En windows tengo que poner /// entre cada carpeta
                         s = str(f[0]).split("\\")
                         s = r"///".join(s)
-                    vagrant_file.write(f"""vm{i} {s} {f[1]} "{f[2]}" {f[3]}'""")
+                    vagrant_file.write(f"""vm{i} {s} {f[1]} {f[2]} "{f[3]}"'""")
                     vagrant_file.write("""}
         end
             """)
