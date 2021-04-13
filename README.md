@@ -24,3 +24,5 @@ El usuario está especificando que el entorno distribuido estará formado por 3 
 La opción -f/--files sirve para que el usuario pueda indicar a cada máquina virtual de las generadas qué archivos .java debe compilar y ejecutar una vez se inicie el entorno. Si el usuario incluye esta opción en el comando inicial, deberá luego escribir en la línea de comandos la ruta de los archivos que desee. 
 
 Si no se especifica la opción -s/--start, el entorno se podrá iniciar de igual manera utilizando el comando `vagrant up`
+
+**Más información en el archivo [Manual EDiPru](https://github.com/lautaropastorino/edipru/blob/master/Manual%20EDiPru.pdf)**
