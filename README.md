@@ -5,11 +5,11 @@ Entorno DIstribuido de PRUebas automatizado para JADE sobre máquinas virtuales 
 
 El script generator.py es una utilidad de línea de comandos que acepta distintos parámetros:
 
--h, --help         Mostrar un mensaje de ayuda que explica el uso de la herramienta y salir.
--s, --start        Iniciar el entorno una vez construido el Vagrantfile
--v VMS, --vms VMS  Indicar la cantidad de máquinas virtuales a generar
--g, --gui          Utilizar interfaz gráfica en la máquina virtual principal. No se puede utilizar al mismo tiempo que -f/--files
-  -f, --files        Indicar que se tienen que compilar y ejecutar archivos. No se puede utilizar al mismo tiempo que -g/--gui
+* -h, --help         Mostrar un mensaje de ayuda que explica el uso de la herramienta y salir.
+* -s, --start        Iniciar el entorno una vez construido el Vagrantfile
+* -v VMS, --vms VMS  Indicar la cantidad de máquinas virtuales a generar
+* -g, --gui          Utilizar interfaz gráfica en la máquina virtual principal. No se puede utilizar al mismo tiempo que -f/--files
+* -f, --files        Indicar que se tienen que compilar y ejecutar archivos. No se puede utilizar al mismo tiempo que -g/--gui
 
 El único argumento obligatorio es -v/--vms el cual indica la cantidad de máquinas virtuales que tendrá el entorno distribuido.
 
